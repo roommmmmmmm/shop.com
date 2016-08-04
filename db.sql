@@ -11,7 +11,7 @@ CREATE TABLE xz_goods(
   goods_desc TEXT COMMENT '商品描述',
   is_on_sale ENUM('是','否') NOT NULL DEFAULT '是' COMMENT '是否上架',
   is_delete ENUM('是','否') NOT NULL DEFAULT '否' COMMENT '是否放入回收站',
-  addtime DATETIME NOT NULL COMMENT '添加时间',
+  addtime DATETIME NOT NULL DEFAULT NOW() COMMENT '添加时间',
   KEY shop_price(shop_price),
   KEY addtime(addtime),
   KEY is_on_sale(is_on_sale)

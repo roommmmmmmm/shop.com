@@ -77,7 +77,7 @@
                 <tr>
                     <td class="label">商品描述：</td>
                     <td>
-                        <textarea name="goods_desc" cols="40" rows="3"></textarea>
+                        <textarea name="goods_desc" id="goods_desc" cols="40" rows="3"></textarea>
                     </td>
                 </tr>
             </table>
@@ -94,3 +94,14 @@
 版权所有 &copy; 仅供个人学习使用.</div>
 </body>
 </html>
+<link href="/shop.com/Public/umeditor/themes/default/css/umeditor.css" type="text/css" rel="stylesheet">
+<script type="text/javascript" src="/shop.com/Public/umeditor/third-party/jquery.min.js"></script>
+<script type="text/javascript" charset="utf-8" src="/shop.com/Public/umeditor/umeditor.config.js"></script>
+<script type="text/javascript" charset="utf-8" src="/shop.com/Public/umeditor/umeditor.min.js"></script>
+<script type="text/javascript" src="/shop.com/Public/umeditor/lang/zh-cn/zh-cn.js"></script>
+<script type="text/javascript">
+  UM.getEditor('goods_desc',{
+    initialFrameWidth:"50%",
+    initialFrameHeight:"150"
+  });
+</script>
