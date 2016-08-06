@@ -13,8 +13,8 @@ class GoodsController extends Controller {
       $model = D('goods');
       /**
        * 接受表单数据并保存到模型中
-       * @var 要接受的数据,默认是$_POST
-       * @var 表单的类型.当前是添加商品表单还是修改表单,1:添加 2:修改
+       * @param 要接受的数据,默认是$_POST
+       * @param 表单的类型.当前是添加商品表单还是修改表单,1:添加 2:修改
        * $_POST:表单中原始的数据,I('POST')是过滤以后的数据
        */
       if($model->create(I('post.'),1)){
