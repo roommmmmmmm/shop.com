@@ -20,7 +20,7 @@ class GoodsModel extends Model
    * @param $option
    * 注意:在函数内部要修改外部的变量,需要按引用传递
    */
-  protected function _before_insert(&$date,$option){
+  protected function _before_insert(&$data,$option){
     // exit('sleep');
     /**
     * 处理用户上传图片
@@ -38,7 +38,32 @@ class GoodsModel extends Model
         $this->error = $upload->getError();
         return false;
       }else {
-        $this->success('上传成功!');
+        // var_dump($info);
+        // exit;
+        /**
+         * 上传成功后生成缩略图
+         */
+         //找到原图地址
+         $logoPath = $info['logo']['savepath'].$info['logo']['savename'];
+         // 拼出缩略图的名字和路径
+         $mbiglogo = $info['logo']['savepath'].'mbig_'.$info['logo']['savename'];
+         $biglogo = $info['logo']['savepath'].'big_'.$info['logo']['savename'];
+         $midlogo = $info['logo']['savepath'].'mid_'.$info['logo']['savename'];
+         $smlogo = $info['logo']['savepath'].'sm_'.$info['logo']['savename'];
+         $image = new \Think\Image();
+         //打开要处理的图片
+         $image->open('./Public/Uploads/'.$logoPath);
+         //生成缩略图
+         $image->thumb(700,700)->save('./Public/Uploads/'.$mbiglogo);
+         $image->thumb(350,350)->save('./Public/Uploads/'.$biglogo);
+         $image->thumb(130,130)->save('./Public/Uploads/'.$midlogo);
+         $image->thumb(50,50)->save('./Public/Uploads/'.$smlogo);
+         $data['logo']=$logoPath;
+         $data['sm_logo']=$smlogo;
+         $data['mid_logo']=$midlogo;
+         $data['big_logo']=$biglogo;
+         $data['mbig_logo']=$mbiglogo;
+        return true;
       }
     }
     //获取当前时间并添加到数据库的数据中
