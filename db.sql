@@ -12,6 +12,11 @@ CREATE TABLE xz_goods(
   is_on_sale ENUM('是','否') NOT NULL DEFAULT '是' COMMENT '是否上架',
   is_delete ENUM('是','否') NOT NULL DEFAULT '否' COMMENT '是否放入回收站',
   addtime DATETIME NOT NULL DEFAULT NOW() COMMENT '添加时间',
+  logo VARCHAR(150) NOT NULL DEFAULT '' COMMENT '原图',
+  sm_logo VARCHAR(150) NOT NULL DEFAULT '' COMMENT '小图',
+  mid_logo VARCHAR(150) NOT NULL DEFAULT '' COMMENT '中图',
+  big_logo VARCHAR(150) NOT NULL DEFAULT '' COMMENT '大图',
+  mbig_logo VARCHAR(150) NOT NULL DEFAULT '' COMMENT '放大图',
   KEY shop_price(shop_price),
   KEY addtime(addtime),
   KEY is_on_sale(is_on_sale)

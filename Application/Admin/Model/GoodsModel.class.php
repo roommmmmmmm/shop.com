@@ -22,6 +22,25 @@ class GoodsModel extends Model
    */
   protected function _before_insert(&$date,$option){
     // exit('sleep');
+    /**
+    * 处理用户上传图片
+    */
+    if (0 == $_FILES['logo']['error']) {
+      $upload = new \Think\Upload();//实例化上传类
+      $upload->maxSize = 1024 * 1024;//设置附件上传大小
+      $upload->exts = array('jpg','gif','png','jpeg');//设置上传类型
+      $upload->rootPath = './Public/Uploads/';//设置附件上传根目录
+      $upload->savePath = 'Goods/';//设置附件上传(子)目录
+      //上传文件
+      $info = $upload->upload();
+      if (!$info) {
+        //获取失败原因保存到模型中
+        $this->error = $upload->getError();
+        return false;
+      }else {
+        $this->success('上传成功!');
+      }
+    }
     //获取当前时间并添加到数据库的数据中
     $data['addtime'] = date('Y-m-d H:i:s',time());
   }
