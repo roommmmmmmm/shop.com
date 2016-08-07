@@ -30,6 +30,10 @@
                     <span class="require-field">*</span></td>
                 </tr>
                 <tr>
+                    <td class="label">LOGO: </td>
+                    <td><input type="file" name="logo" size="60" />
+                </tr>
+                <tr>
                     <td class="label">商品分类：</td>
                     <td>
                         <select name="cat_id">
