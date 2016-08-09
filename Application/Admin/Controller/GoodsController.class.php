@@ -36,6 +36,13 @@ class GoodsController extends Controller {
    * 商品列表页
    */
    public function goodsList(){
-     echo '商品列表页';
+     $model = D('goods');
+
+     //返回数据和分页
+     $data = $model->search(1);
+     $this->assign($data);
+    //  var_dump($data);
+    //  exit;
+     $this->display();
    }
 }

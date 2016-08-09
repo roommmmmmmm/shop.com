@@ -69,4 +69,29 @@ class GoodsModel extends Model
     //获取当前时间并添加到数据库的数据中
     $data['addtime'] = date('Y-m-d H:i:s',time());
   }
+  /**
+   * 实现翻页/搜索/排序
+   */
+  public function search($perpage = 20){
+    /**
+     * 翻页
+     */
+     //取出总记录数
+     $count = $this->count();
+     //生成翻页类的对象
+     $Page = new \Think\Page($count,$perpage);
+     //设置样式
+     $Page->setConfig('next','下一页');
+     $Page->setConfig('prev','上一页');
+      //生成html字符串
+     $pagestr = $Page->show();
+    /**
+     * 取数据
+     */
+    $data = $this->limit($Page->firstRow.','.$Page->listRows)->select();
+    return array(
+      'data'=>$data,
+      'page'=>$pagestr
+    );
+  }
 }

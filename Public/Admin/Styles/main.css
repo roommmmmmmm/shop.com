@@ -1,7 +1,3 @@
-/*
-$Id: main.css 13991 2008-01-17 06:17:23Z maruitao $
-*/
-
 .dis{
   display:block;
 }
@@ -352,15 +348,15 @@ li.warning {
   margin-bottom: 5px;
 }
 
-#Marquee{ 
-  height:20px; 
-  overflow:hidden;  
+#Marquee{
+  height:20px;
+  overflow:hidden;
   border: 1px solid #CC0000;
   background: #FFFFCC;
   margin-bottom: 5px;
 }
-  
-#Marquee div{ 
+
+#Marquee div{
   background: #FFFFCC;
   padding: 10px;
   margin-bottom: 5px;
@@ -851,3 +847,6 @@ em, cite, th {
 .cloud_close a{}
 .cloud_close img{ position:absolute; right:10px; top:8px; border:none}
 .Start315{border: 1px solid #CC0000; background: #ffffcc; padding: 10px; margin-bottom: 5px;}
+/*翻页样式*/
+#page-table a{padding: 5px;}
+#page-table span.current{padding: 5px;background: #F00;margin: 5px ;color: #FFF;font-weight: bold;}
