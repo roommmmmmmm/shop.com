@@ -74,10 +74,43 @@ class GoodsModel extends Model
    */
   public function search($perpage = 20){
     /**
+     * 搜索功能
+     */
+     $where = array();
+     $goods_name = I('get.goods_name'); // 名称搜索
+     if ($goods_name) {
+       $where['goods_name']=array("like","%$goods_name%");
+     }
+     // 按照商品价格搜索
+     $fp = I('get.fp');
+     $tp = I('get.tp');
+     if ($fp && $tp) {
+       $where['shop_price'] = array('between',array($fp,$tp));
+     }elseif ($fp) {
+       $where['shop_price'] = array('egt',$fp); // WHERE shop_price >= $fp
+     }elseif ($tp) {
+       $where['shop_price'] = array('elt',$fp); // WHERE shop_price <= $fp
+     }
+     // 搜索是否上架
+     $is_on_sale = I('get.is_on_sale');
+     if ($is_on_sale) {
+      $where['is_on_sale']= array('eq',$is_on_sale);
+     }
+     // 按照商品添加时间搜索
+     $fp = I('get.fa');
+     $tp = I('get.ta');
+     if ($fa && $ta) {
+       $where['addtime'] = array('between',array($fa,$ta));
+     }elseif ($fa) {
+       $where['addtime'] = array('egt',$fa);
+     }elseif ($ta) {
+       $where['addtime'] = array('elt',$ta);
+     }
+    /**
      * 翻页
      */
      //取出总记录数
-     $count = $this->count();
+     $count = $this->where($where)->count();
      //生成翻页类的对象
      $Page = new \Think\Page($count,$perpage);
      //设置样式
@@ -85,10 +118,24 @@ class GoodsModel extends Model
      $Page->setConfig('prev','上一页');
       //生成html字符串
      $pagestr = $Page->show();
+     //排序 (可能存在bug)
+     $orderby = 'id'; //默认排序字段
+     $deorderby = 'desc'; //默认排序方式
+     $order = I('get.oderby');
+     if ($order) {
+       if ($order == 'id_asc') {
+         $deorderby = 'asc';
+       }elseif ($order == 'price_desc') {
+         $deorderby = 'shop_price';
+       }elseif ($order == 'price_asc') {
+         $orderby = 'shop_price';
+         $deorderby = 'asc';
+       }
+     }
     /**
      * 取数据
      */
-    $data = $this->limit($Page->firstRow.','.$Page->listRows)->select();
+    $data = $this->order("$orderby $deorderby")->where($where)->limit($Page->firstRow.','.$Page->listRows)->select();
     return array(
       'data'=>$data,
       'page'=>$pagestr
