@@ -1,18 +1,4 @@
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<title>管理中心 - 商品列表 </title>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<link href="__PUBLIC__/Admin/Styles/general.css" rel="stylesheet" type="text/css" />
-<link href="__PUBLIC__/Admin/Styles/main.css" rel="stylesheet" type="text/css" />
-</head>
-<body>
-<h1>
-    <span class="action-span"><a href="__CONTROLLER__/addGoods">添加新商品</a></span>
-    <span class="action-span1"><a href="__GROUP__">管理中心</a></span>
-    <span id="search_id" class="action-span1"> - 商品列表 </span>
-    <div style="clear:both"></div>
-</h1>
+<layout name="layout" />
 <div class="form-div">
     <form action="__ACTION__" method="get" name="searchForm">
         <p>
@@ -61,11 +47,10 @@
                 <th>市场价格</th>
                 <th>本店价格</th>
                 <th>上架</th>
-                <th>库存</th>
                 <th>操作</th>
             </tr>
             <?php foreach($data as $key => $value): ?>
-            <tr>
+            <tr class="tron">
                 <td align="center"><?php echo $value['id']; ?></td>
                 <td align="center" class="first-cell"><span><?php echo $value['goods_name']; ?></span></td>
                 <td align="center"><img src="/Public/Uploads/<?php echo $value['sm_logo']; ?>" alt="" /></td>
@@ -73,9 +58,9 @@
                 <td align="center"><span><?php echo $value['shop_price']; ?></span></td>
                 <td align="center"><span><?php echo $value['is_on_sale']; ?></span></td>
                 <td align="center">
-                <a href="__APP__/Goods/?goods_id=<{$val.goods_id}>" target="_blank" title="查看"><img src="./Images/icon_view.gif" width="16" height="16" border="0" /></a>
-                <a href="__GROUP__/Goods/goodsEdit?goods_id=<{$val.goods_id}>" title="编辑"><img src="./Images/icon_edit.gif" width="16" height="16" border="0" /></a>
-                <a href="__GROUP__/Goods/goodsTrash?goods_id=<{$val.goods_id}>" onclick="" title="回收站"><img src="./Images/icon_trash.gif" width="16" height="16" border="0" /></a></td>
+                  <a href="<?php echo U('editGoods?id='.$value['id']); ?>">修改</a>
+                  <a onclick="return confirm('确定要删除吗?');" href="<?php echo U('deleteGoods?id='.$value['id']); ?>">删除</a>
+                </td>
             </tr>
           <?php endforeach; ?>
         </table>
@@ -92,9 +77,3 @@
     <!-- 分页结束 -->
     </div>
 </form>
-
-<div id="footer">
-共执行 9 个查询，用时 0.025161 秒，Gzip 已禁用，内存占用 3.258 MB<br />
-版权所有 &copy; 仅供个人学习使用.</div>
-</body>
-</html>
