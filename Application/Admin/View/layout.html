@@ -8,7 +8,9 @@
 </head>
 <body>
 <h1>
+  <?php if($botton_name): ?>
     <span class="action-span"><a href="<?php echo $botton_link; ?>"><?php echo $botton_name; ?></a></span>
+  <?php endif; ?>
     <span class="action-span1"><a href="__GROUP__">管理中心</a></span>
     <span id="search_id" class="action-span1"> - <?php echo $page_name; ?> </span>
     <div style="clear:both"></div>

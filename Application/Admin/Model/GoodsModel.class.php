@@ -120,11 +120,9 @@ class GoodsModel extends Model
           //删除原来的图片
           $oldlogo = $this->field('logo,mbig_logo,big_logo,mid_logo,sm_logo')->find($id);
           //从硬盘上删除
-          unlink('./Public/Uploads/'.$oldlogo['logo']);
-          unlink('./Public/Uploads/'.$oldlogo['mbig_logo']);
-          unlink('./Public/Uploads/'.$oldlogo['big_logo']);
-          unlink('./Public/Uploads/'.$oldlogo['mid_logo']);
-          unlink('./Public/Uploads/'.$oldlogo['sm_logo']);
+          // var_dump($oldlogo);
+          deleteImage($oldlogo);
+          // exit;
           return true;
        }
      }
@@ -138,11 +136,7 @@ class GoodsModel extends Model
       //删除原来的图片
       $oldlogo = $this->field('logo,mbig_logo,big_logo,mid_logo,sm_logo')->find($id);
       //从硬盘上删除
-      unlink('./Public/Uploads/'.$oldlogo['logo']);
-      unlink('./Public/Uploads/'.$oldlogo['mbig_logo']);
-      unlink('./Public/Uploads/'.$oldlogo['big_logo']);
-      unlink('./Public/Uploads/'.$oldlogo['mid_logo']);
-      unlink('./Public/Uploads/'.$oldlogo['sm_logo']);
+      deleteImage($oldlogo);
     }
   /**
    * 实现翻页/搜索/排序

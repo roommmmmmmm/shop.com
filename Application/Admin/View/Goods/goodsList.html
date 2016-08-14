@@ -53,7 +53,7 @@
             <tr class="tron">
                 <td align="center"><?php echo $value['id']; ?></td>
                 <td align="center" class="first-cell"><span><?php echo $value['goods_name']; ?></span></td>
-                <td align="center"><img src="/Public/Uploads/<?php echo $value['sm_logo']; ?>" alt="" /></td>
+                <td align="center"><?php showImage($value['mid_logo']); ?></td>
                 <td align="center"><span><?php echo $value['market_price']; ?></span></td>
                 <td align="center"><span><?php echo $value['shop_price']; ?></span></td>
                 <td align="center"><span><?php echo $value['is_on_sale']; ?></span></td>
