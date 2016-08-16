@@ -21,3 +21,9 @@ CREATE TABLE xz_goods(
   KEY addtime(addtime),
   KEY is_on_sale(is_on_sale)
 )engine=InnoDB default charset=utf8 comment '商品';
+DROP TABLE if exists xz_brand;
+CREATE TABLE xz_brand(
+  id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Id',
+  brand_name VARCHAR(30) NOT NULL COMMENT '品牌名称',
+  site_url VARCHAR(50) DEFAULT '' COMMENT '官方网站'
+)engine=InnoDB default charset=utf8 comment '品牌';
