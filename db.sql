@@ -17,10 +17,13 @@ CREATE TABLE xz_goods(
   mid_logo VARCHAR(150) NOT NULL DEFAULT '' COMMENT '中图',
   big_logo VARCHAR(150) NOT NULL DEFAULT '' COMMENT '大图',
   mbig_logo VARCHAR(150) NOT NULL DEFAULT '' COMMENT '放大图',
+  brand_id MEDIUMINT UNSIGNED NOT NULL COMMENT '品牌id',
   KEY shop_price(shop_price),
   KEY addtime(addtime),
-  KEY is_on_sale(is_on_sale)
+  KEY is_on_sale(is_on_sale),
+  key brand_id(brand_id)
 )engine=InnoDB default charset=utf8 comment '商品';
+alter table xz_goods add index brand_id(brand_id);
 DROP TABLE if exists xz_brand;
 CREATE TABLE xz_brand(
   id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Id',
