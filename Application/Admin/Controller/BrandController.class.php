@@ -15,7 +15,7 @@ class BrandController extends Controller
     		{
     			if($id = $model->add())
     			{
-    				$this->success('添加成功！', U('lst?p='.I('get.p')));
+    				$this->success('添加成功！', U('brandsList?p='.I('get.p')));
     				exit;
     			}
     		}
@@ -40,7 +40,7 @@ class BrandController extends Controller
     		{
     			if($model->save() !== FALSE)
     			{
-    				$this->success('修改成功！', U('lst', array('p' => I('get.p', 1))));
+    				$this->success('修改成功！', U('brandsList', array('p' => I('get.p', 1))));
     				exit;
     			}
     		}
@@ -63,7 +63,7 @@ class BrandController extends Controller
     	$model = D('Brand');
     	if($model->delete(I('get.id', 0)) !== FALSE)
     	{
-    		$this->success('删除成功！', U('lst', array('p' => I('get.p', 1))));
+    		$this->success('删除成功！', U('brandsList', array('p' => I('get.p', 1))));
     		exit;
     	}
     	else

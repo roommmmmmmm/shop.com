@@ -29,6 +29,12 @@ class GoodsController extends Controller {
       //显示错误信息
       $this->error($error);
     }
+    //取出所有品牌
+    $brandmodel = D('brand');
+    $branddata = $brandmodel->select();
+    // var_dump($branddata);
+    // exit;
+    $this->assign('brandinfo',$branddata);
     //显示表单
     $this->display();
   }
