@@ -61,6 +61,10 @@ class GoodsController extends Controller {
       //显示错误信息
       $this->error($error);
     }
+    //取出所有品牌
+    $brandmodel = D('brand');
+    $branddata = $brandmodel->select();
+    $this->assign('brandinfo',$branddata);
     //显示表单
     $data = $model->find($id);
     // var_dump($data);
@@ -74,7 +78,7 @@ class GoodsController extends Controller {
      $model = D('goods');
 
      //返回数据和分页
-     $data = $model->search(1);
+     $data = $model->search(5);
      $this->assign($data);
      $this->assign(array(
        'page_name'=>'商品列表',
