@@ -169,11 +169,11 @@ class GoodsModel extends Model
      $fp = I('get.fa');
      $tp = I('get.ta');
      if ($fa && $ta) {
-       $where['addtime'] = array('between',array($fa,$ta));
+       $where['a.addtime'] = array('between',array($fa,$ta));
      }elseif ($fa) {
-       $where['addtime'] = array('egt',$fa);
+       $where['a.addtime'] = array('egt',$fa);
      }elseif ($ta) {
-       $where['addtime'] = array('elt',$ta);
+       $where['a.addtime'] = array('elt',$ta);
      }
     /**
      * 翻页
@@ -188,7 +188,7 @@ class GoodsModel extends Model
       //生成html字符串
      $pagestr = $Page->show();
      //排序 (可能存在bug)
-     $orderby = 'id'; //默认排序字段
+     $orderby = 'a.id'; //默认排序字段
      $deorderby = 'desc'; //默认排序方式
      $order = I('get.oderby');
      if ($order) {
@@ -204,7 +204,17 @@ class GoodsModel extends Model
     /**
      * 取数据
      */
-    $data = $this->order("$orderby $deorderby")->where($where)->limit($Page->firstRow.','.$Page->listRows)->select();
+     //连表查询 select a.*,b.brand_name from xz_goods as a ,xz_brand as b where a.brand_id=b.id\G
+     //        select a.*,b.brand_name from xz_goods as a left join xz_brand as b on a.brand_id=b.id\G
+    $data = $this->order("$orderby $deorderby") //排序
+                 ->field('a.*,b.brand_name')
+                 ->alias('a')    //起别名
+                 ->join('LEFT JOIN __BRAND__ as b ON a.brand_id=b.id')    //连表查询
+                 ->where($where)   //搜索
+                 ->limit($Page->firstRow.','.$Page->listRows)    //分页
+                 ->select();
+    // var_dump($data);
+    // exit;
     return array(
       'data'=>$data,
       'page'=>$pagestr
