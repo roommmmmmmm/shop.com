@@ -39,6 +39,23 @@
                     </td>
                 </tr>
                 <tr>
+                    <td class="label">商品品牌：</td>
+                    <td>
+                      <select name="brand_id">
+                        <option value="">请选择：</option>
+                        <?php foreach($brandinfo as $val):
+                          if($data['brand_id'] == $val['id']){
+                            $select = 'selected="selected"';
+                          }else{
+                            $select = '';
+                          }
+                          ?>
+                        <option <?php echo $select;?> value="<?php echo $val['id'];?>"><?php echo $val['brand_name'];?></option>
+                        <?php endforeach;?>
+                      </select>
+                    </td>
+                </tr>
+                <tr>
                     <td class="label">商品分类：</td>
                     <td>
                         <select name="cat_id">
@@ -48,17 +65,6 @@
                             </foreach>
                         </select>
                         <span class="require-field">*</span>
-                    </td>
-                </tr>
-                <tr>
-                    <td class="label">商品品牌：</td>
-                    <td>
-                        <select name="brand_id">
-                            <option value="0">请选择...</option>
-                            <foreach name="brand_list" item="val">
-                            <option value="<{$val.brand_id}>"><{$val.brand_name}></option>
-                            </foreach>
-                        </select>
                     </td>
                 </tr>
                 <tr>
