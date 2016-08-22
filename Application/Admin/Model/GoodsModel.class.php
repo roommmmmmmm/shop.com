@@ -169,11 +169,15 @@ class GoodsModel extends Model
      $fp = I('get.fa');
      $tp = I('get.ta');
      if ($fa && $ta) {
-       $where['a.addtime'] = array('between',array($fa,$ta));
+       $where['addtime'] = array('between',array($fa,$ta));
      }elseif ($fa) {
-       $where['a.addtime'] = array('egt',$fa);
+       $where['addtime'] = array('egt',$fa);
      }elseif ($ta) {
-       $where['a.addtime'] = array('elt',$ta);
+       $where['addtime'] = array('elt',$ta);
+     }
+     $brandid = I('get.brand_id');
+     if ($brandid) {
+       $where['brand_id'] = array('eq',$brandid);
      }
     /**
      * 翻页
