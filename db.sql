@@ -30,15 +30,20 @@ CREATE TABLE xz_brand(
   brand_name VARCHAR(30) NOT NULL COMMENT '品牌名称',
   site_url VARCHAR(50) DEFAULT '' COMMENT '官方网站'
 )engine=InnoDB default charset=utf8 comment '品牌';
+
 DROP TABLE if exists xz_member_level;
 CREATE TABLE xz_member_level(
   level_id MEDIUMINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY COMMENT 'Id',
   level_name VARCHAR(30) NOT NULL COMMENT '级别名称',
-  lower_limit MEDIUMINT UNSIGNED NOT NULL DEFAULT '' COMMENT '积分下限'
-  upper_limit MEDIUMINT UNSIGNED NOT NULL DEFAULT '' COMMENT '积分上限'
+  lower_limit MEDIUMINT UNSIGNED NOT NULL COMMENT '积分下限',
+  upper_limit MEDIUMINT UNSIGNED NOT NULL COMMENT '积分上限'
 )engine=InnoDB default charset=utf8 comment '会员级别';
+
 DROP TABLE if exists xz_member_price;
 CREATE TABLE xz_member_price(
   price DECIMAL(10,2) NOT NULL COMMENT '会员价格',
-  level_id MEDIUMINT UNSIGNED NOT NULL COMMENT '级别 '
+  level_id MEDIUMINT UNSIGNED NOT NULL COMMENT '级别ID',
+  goods_id MEDIUMINT UNSIGNED NOT NULL COMMENT '商品ID',
+  key level_id(level_id),
+  key goods_id(goods_id)
 )engine=InnoDB default charset=utf8 comment '会员价格';

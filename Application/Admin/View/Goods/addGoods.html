@@ -53,6 +53,14 @@
                     </td>
                 </tr>
                 <tr>
+                    <td class="label">会员价格：</td>
+                    <td>
+                        <?php foreach( $memdata as $key => $value): ?>
+                        <?php echo $value['level_name']; ?>:￥<input type="text" name="member_price[<?php echo $value['level_id']; ?>]" value="0" size="20"/><br />
+                        <?php endforeach; ?>
+                    </td>
+                </tr>
+                <tr>
                     <td class="label">商品数量：</td>
                     <td>
                         <input type="text" name="goods_number" size="8" value=""/>

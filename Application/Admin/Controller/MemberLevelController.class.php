@@ -1,21 +1,18 @@
 <?php
 namespace Admin\Controller;
 use Think\Controller;
-/**
- * 品牌控制器
- */
-class BrandController extends Controller
+class MemberLevelController extends Controller 
 {
-    public function addBrands()
+    public function add()
     {
     	if(IS_POST)
     	{
-    		$model = D('Brand');
+    		$model = D('MemberLevel');
     		if($model->create(I('post.'), 1))
     		{
     			if($id = $model->add())
     			{
-    				$this->success('添加成功！', U('brandsList?p='.I('get.p')));
+    				$this->success('添加成功！', U('lst?p='.I('get.p')));
     				exit;
     			}
     		}
@@ -24,56 +21,56 @@ class BrandController extends Controller
 
 		// 设置页面中的信息
 		$this->assign(array(
-			'page_name' => '添加品牌',
-			'botton_name' => '品牌列表',
-			'botton_link' => U('brandsList'),
+			'_page_title' => '添加会员级别',
+			'_page_btn_name' => '会员级别列表',
+			'_page_btn_link' => U('lst'),
 		));
 		$this->display();
     }
-    public function editBrands()
+    public function edit()
     {
-    	$id = I('get.id');
+    	$level_id = I('get.level_id');
     	if(IS_POST)
     	{
-    		$model = D('Brand');
+    		$model = D('MemberLevel');
     		if($model->create(I('post.'), 2))
     		{
     			if($model->save() !== FALSE)
     			{
-    				$this->success('修改成功！', U('brandsList', array('p' => I('get.p', 1))));
+    				$this->success('修改成功！', U('lst', array('p' => I('get.p', 1))));
     				exit;
     			}
     		}
     		$this->error($model->getError());
     	}
-    	$model = M('Brand');
-    	$data = $model->find($id);
+    	$model = M('MemberLevel');
+    	$data = $model->find($level_id);
     	$this->assign('data', $data);
 
 		// 设置页面中的信息
 		$this->assign(array(
-			'page_name' => '修改品牌',
-			'botton_name' => '品牌列表',
-			'botton_link' => U('brandsList'),
+			'_page_title' => '修改会员级别',
+			'_page_btn_name' => '会员级别列表',
+			'_page_btn_link' => U('lst'),
 		));
 		$this->display();
     }
     public function delete()
     {
-    	$model = D('Brand');
+    	$model = D('MemberLevel');
     	if($model->delete(I('get.id', 0)) !== FALSE)
     	{
-    		$this->success('删除成功！', U('brandsList', array('p' => I('get.p', 1))));
+    		$this->success('删除成功！', U('lst', array('p' => I('get.p', 1))));
     		exit;
     	}
-    	else
+    	else 
     	{
     		$this->error($model->getError());
     	}
     }
-    public function brandsList()
+    public function lst()
     {
-    	$model = D('Brand');
+    	$model = D('MemberLevel');
     	$data = $model->search();
     	$this->assign(array(
     		'data' => $data['data'],
@@ -82,9 +79,9 @@ class BrandController extends Controller
 
 		// 设置页面中的信息
 		$this->assign(array(
-			'page_name' => '品牌列表',
-			'botton_name' => '添加品牌',
-			'botton_link' => U('addBrands'),
+			'_page_title' => '会员级别列表',
+			'_page_btn_name' => '添加会员级别',
+			'_page_btn_link' => U('add'),
 		));
     	$this->display();
     }

@@ -1,0 +1,32 @@
+<layout name="layout" />
+
+<!-- 列表 -->
+<div class="list-div" id="listDiv">
+	<table cellpadding="3" cellspacing="1">
+    	<tr>
+            <th >级别名称</th>
+            <th >积分下限</th>
+            <th >积分上限</th>
+			<th width="60">操作</th>
+        </tr>
+		<?php foreach ($data as $k => $v): ?>            
+			<tr class="tron">
+				<td><?php echo $v['level_name']; ?></td>
+				<td><?php echo $v['lower_limit']; ?></td>
+				<td><?php echo $v['upper_limit']; ?></td>
+		        <td align="center">
+		        	<a href="<?php echo U('edit?level_id='.$v['level_id'].'&p='.I('get.p')); ?>" title="编辑">编辑</a> |
+	                <a href="<?php echo U('delete?level_id='.$v['level_id'].'&p='.I('get.p')); ?>" onclick="return confirm('确定要删除吗？');" title="移除">移除</a> 
+		        </td>
+	        </tr>
+        <?php endforeach; ?> 
+		<?php if(preg_match('/\d/', $page)): ?>  
+        <tr><td align="right" nowrap="true" colspan="99" height="30"><?php echo $page; ?></td></tr> 
+        <?php endif; ?> 
+	</table>
+</div>
+
+<script>
+</script>
+
+<script src="__PUBLIC__/Admin/Js/tron.js"></script>

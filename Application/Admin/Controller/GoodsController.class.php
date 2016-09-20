@@ -29,6 +29,12 @@ class GoodsController extends Controller {
       //显示错误信息
       $this->error($error);
     }
+    //取出所有的会员级别
+    $memModel = D('member_level');
+    $memdata = $memModel -> select();
+    $this->assign(array(
+      'memdata'=>$memdata
+    ));
     // //取出所有品牌
     // $brandmodel = D('brand');
     // $branddata = $brandmodel->select();

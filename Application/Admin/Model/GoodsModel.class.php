@@ -224,4 +224,20 @@ class GoodsModel extends Model
       'page'=>$pagestr
     );
   }
+  /**
+   * 商品添加后会调用这个钩子函数，$data['id']中保存的是新添加商品的id
+   */
+  protected function _after_insert($data,$option){
+    $memprice = I('post.member_price');
+    $mempriceModel = D('member_price');
+    foreach($memprice as $key => $value){
+      $mempriceModel->add(
+      array(
+        'price'=>$value,
+        'level_id'=>$key,
+        'goods_id'=>$data['id']
+      )
+    );
+    }
+  }
 }
