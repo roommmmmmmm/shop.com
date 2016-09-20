@@ -18,12 +18,16 @@
 <div class="tab-div">
     <div id="tabbar-div">
         <p>
-            <span class="tab-front" id="general-tab">通用信息</span>
+            <span class="tab-front">基本信息</span>
+            <span class="tab-back">商品描述</span>
+            <span class="tab-back">会员价格</span>
+            <span class="tab-back">商品相册</span>
         </p>
     </div>
     <div id="tabbody-div">
         <form enctype="multipart/form-data" action="__SELF__" method="post">
-            <table width="90%" id="general-table" align="center">
+            <!-- 基本信息 -->
+            <table width="90%" class="tab_table" align="center">
                 <tr>
                     <td class="label">商品品牌：</td>
                     <td>
@@ -52,14 +56,7 @@
                         <span class="require-field">*</span>
                     </td>
                 </tr>
-                <tr>
-                    <td class="label">会员价格：</td>
-                    <td>
-                        <?php foreach( $memdata as $key => $value): ?>
-                        <?php echo $value['level_name']; ?>:￥<input type="text" name="member_price[<?php echo $value['level_id']; ?>]" value="0" size="20"/><br />
-                        <?php endforeach; ?>
-                    </td>
-                </tr>
+
                 <tr>
                     <td class="label">商品数量：</td>
                     <td>
@@ -79,12 +76,31 @@
                         <input type="text" name="market_price" value="0" size="20" />
                     </td>
                 </tr>
-                <tr>
-                    <td class="label">商品描述：</td>
-                    <td>
-                        <textarea name="goods_desc" id="goods_desc" cols="40" rows="3"></textarea>
-                    </td>
-                </tr>
+
+            </table>
+            <!-- 商品描述 -->
+            <table style="display:none" width="90%" class="tab_table" align="center">
+              <tr>
+                  <td class="label">商品描述：</td>
+                  <td>
+                      <textarea name="goods_desc" id="goods_desc" cols="40" rows="3"></textarea>
+                  </td>
+              </tr>
+            </table>
+            <!-- 会员价格 -->
+            <table style="display:none" width="90%" class="tab_table" align="center">
+              <tr>
+                  <td class="label">会员价格：</td>
+                  <td>
+                      <?php foreach( $memdata as $key => $value): ?>
+                      <?php echo $value['level_name']; ?>:￥<input type="text" name="member_price[<?php echo $value['level_id']; ?>]" value="0" size="20"/><br />
+                      <?php endforeach; ?>
+                  </td>
+              </tr>
+            </table>
+            <!-- 商品相册 -->
+            <table style="display:none" width="90%" class="tab_table" align="center">
+
             </table>
             <div class="button-div">
                 <input type="submit" value=" 确定 " class="button"/>
@@ -109,4 +125,20 @@
     initialFrameWidth:"50%",
     initialFrameHeight:"150"
   });
+
+  // 切换选项卡的代码
+
+$("#tabbar-div p span").click(function(){
+  //点击第几个按钮
+  var i = $(this).index();
+  $(".tab_table").hide();
+  //显示第i个taible
+  $(".tab_table").eq(i).show();
+
+  //设置选中按钮
+  $(".tab-front").removeClass("tab-front").addClass("tab-back");
+  $(this).removeClass("tab-back").addClass("tab-front");
+
+
+});
 </script>

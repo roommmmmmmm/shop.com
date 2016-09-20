@@ -226,18 +226,22 @@ class GoodsModel extends Model
   }
   /**
    * 商品添加后会调用这个钩子函数，$data['id']中保存的是新添加商品的id
+   * 但是依旧有bug，后续完善。
    */
   protected function _after_insert($data,$option){
     $memprice = I('post.member_price');
     $mempriceModel = D('member_price');
     foreach($memprice as $key => $value){
-      $mempriceModel->add(
-      array(
-        'price'=>$value,
-        'level_id'=>$key,
-        'goods_id'=>$data['id']
-      )
-    );
+      $value = (float) $value; //一个非常好的做法，用来判断插入的数据是否合法。
+      if ($value > 0) {
+        $mempriceModel->add(
+        array(
+          'price'=>$value,
+          'level_id'=>$key,
+          'goods_id'=>$data['id']
+        )
+      );
+      }
     }
   }
 }
